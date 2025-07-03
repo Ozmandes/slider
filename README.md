@@ -43,3 +43,7 @@ The only goal is to **destroy the opponent in a head-to-head battle**.
 ---
 
 ## 🚀 Are you ready for a head-on collision showdown?
+
+---
+
+本游戏使用Godot游戏引擎制作，使用GDscript语言制作，所有游戏素材仅采用Godot引擎原生粒子系统与Shader制作，更多Shader可以参考https://godotshaders.com/。
