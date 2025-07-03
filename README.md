@@ -47,3 +47,4 @@ The only goal is to **destroy the opponent in a head-to-head battle**.
 ---
 
 本游戏使用Godot游戏引擎制作，使用GDscript语言制作，所有游戏素材仅采用Godot引擎原生粒子系统与Shader制作，更多Shader可以参考https://godotshaders.com/
+本项目在 https://ozmandes.itch.io/slider 同步更新。
