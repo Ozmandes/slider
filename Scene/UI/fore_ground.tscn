@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2f1f2dlrveog"]
+
+[ext_resource type="Shader" path="res://Scene/UI/crt_moniter.gdshader" id="1_lj84v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_08brd"]
+shader = ExtResource("1_lj84v")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(2560, 1440)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 15.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.0
+shader_parameter/noise_opacity = 0.0
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.0
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 1.1
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.1
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.2
+shader_parameter/vignette_opacity = 0.2
+
+[node name="ForeGround" type="CanvasLayer"]
+
+[node name="CRTMoniter" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_08brd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true

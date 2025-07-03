@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://dli8a0xf66wd8"]
+
+[ext_resource type="Script" path="res://Scene/UI/pause_menu.gd" id="1_usli4"]
+[ext_resource type="PackedScene" uid="uid://74qodqlakjxk" path="res://Scene/UI/change_scene.tscn" id="2_8ut64"]
+[ext_resource type="Theme" uid="uid://dh8dblbdpjymt" path="res://Scene/UI/theme.tres" id="2_k5y5q"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = ExtResource("1_usli4")
+change_scene_scene = ExtResource("2_8ut64")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.307, 0.307, 0.307, 0.554)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 256
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Pause" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_k5y5q")
+bbcode_enabled = true
+text = "[wave amp=80 freq=5]Paused"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_k5y5q")
+theme_override_colors/font_color = Color(0.259626, 0.736077, 0.691296, 1)
+theme_override_font_sizes/font_size = 32
+text = "Press \"ESC\" to exit"

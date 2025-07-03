@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0ii8halcapn8"]
+
+[ext_resource type="Script" path="res://Scene/Player/enemy_component.gd" id="1_u6xq4"]
+[ext_resource type="PackedScene" uid="uid://bb3vtlfovpr0y" path="res://Scene/Player/enemy.tscn" id="2_80eb4"]
+
+[node name="EnemyComponent" type="Node"]
+script = ExtResource("1_u6xq4")
+enemy_scene = ExtResource("2_80eb4")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true

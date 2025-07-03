@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6qvxo6i2s1bs"]
+
+[ext_resource type="Shader" path="res://Scene/UI/water_alternative.gdshader" id="1_amnof"]
+[ext_resource type="Script" path="res://Scene/UI/main_menu.gd" id="1_vnkbl"]
+[ext_resource type="PackedScene" uid="uid://ctpcriqlcgahx" path="res://Scene/UI/option_menu.tscn" id="2_cr4ye"]
+[ext_resource type="Shader" path="res://Scene/UI/high_light.gdshader" id="2_i033e"]
+[ext_resource type="PackedScene" uid="uid://74qodqlakjxk" path="res://Scene/UI/change_scene.tscn" id="3_ayx03"]
+[ext_resource type="Theme" uid="uid://dh8dblbdpjymt" path="res://Scene/UI/theme.tres" id="3_vwslk"]
+[ext_resource type="PackedScene" uid="uid://c2f1f2dlrveog" path="res://Scene/UI/fore_ground.tscn" id="3_yfhqq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7h04"]
+shader = ExtResource("1_amnof")
+shader_parameter/R = Vector2(0.8, 0.6)
+shader_parameter/scale = 0.5
+shader_parameter/speed = 0.1
+shader_parameter/direction = Vector3(1, 1, 0)
+shader_parameter/distortion = 0.5
+shader_parameter/layers = 2.0
+shader_parameter/shades = 3.0
+shader_parameter/steps = 4
+shader_parameter/tint = Vector3(0.25, 0.2, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_07dnf"]
+shader = ExtResource("2_i033e")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.09
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.6
+shader_parameter/Speed = 0.4
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 0.6
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_vnkbl")
+option_menu_scene = ExtResource("2_cr4ye")
+change_scene_scene = ExtResource("3_ayx03")
+
+[node name="BackGround" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="BackGround"]
+material = SubResource("ShaderMaterial_m7h04")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HighLight" type="ColorRect" parent="BackGround"]
+material = SubResource("ShaderMaterial_07dnf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 48
+
+[node name="Title" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer2"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_vwslk")
+bbcode_enabled = true
+text = "[wave amp=80 freq=5]Slider"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Start" type="Button" parent="UI/MarginContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_vwslk")
+text = "Start"
+
+[node name="Option" type="Button" parent="UI/MarginContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_vwslk")
+text = "Option"
+
+[node name="Quit" type="Button" parent="UI/MarginContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_vwslk")
+text = "Quit"
+
+[node name="ForeGround" parent="." instance=ExtResource("3_yfhqq")]

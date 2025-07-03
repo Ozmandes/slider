@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://1ukxyy0pgbxw"]
+
+[ext_resource type="PackedScene" uid="uid://cq5eegd5j1p11" path="res://Scene/Player/velocity_component.tscn" id="1_5rvxm"]
+[ext_resource type="Script" path="res://Scene/Player/player.gd" id="1_g1cbd"]
+[ext_resource type="PackedScene" uid="uid://c3cgx4mhr8w0r" path="res://Scene/Player/inspecter.tscn" id="3_cxi8a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74os0"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_de4u7"]
+radius = 4.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_g1cbd")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("1_5rvxm")]
+unique_name_in_owner = true
+max_speed = 800
+acceleration = 1.0
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Body" type="GPUParticles2D" parent="Visual"]
+unique_name_in_owner = true
+amount = 64
+lifetime = 0.5
+randomness = 1.0
+fixed_fps = 60
+
+[node name="Head" type="GPUParticles2D" parent="Visual"]
+unique_name_in_owner = true
+position = Vector2(0, -32)
+amount = 32
+lifetime = 0.5
+randomness = 1.0
+fixed_fps = 60
+
+[node name="Hit" type="GPUParticles2D" parent="Visual/Head"]
+unique_name_in_owner = true
+emitting = false
+amount = 128
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.5
+fixed_fps = 60
+trail_sections = 2
+trail_section_subdivisions = 1
+
+[node name="Inspecter" parent="Visual/Head" instance=ExtResource("3_cxi8a")]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visual/Head/Inspecter"]
+shape = SubResource("CircleShape2D_74os0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_de4u7")

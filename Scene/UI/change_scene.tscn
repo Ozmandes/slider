@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://74qodqlakjxk"]
+
+[ext_resource type="Script" path="res://Scene/UI/change_scene.gd" id="1_wfwu6"]
+[ext_resource type="Shader" path="res://Scene/UI/back_ground.gdshader" id="2_gta65"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ude0p"]
+shader = ExtResource("2_gta65")
+shader_parameter/spin_rotation_speed = 2.0
+shader_parameter/move_speed = 2.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/colour_1 = Color(0.208381, 0.000377826, 0.535077, 1)
+shader_parameter/colour_2 = Color(0.0494053, 0.436162, 0.801681, 1)
+shader_parameter/colour_3 = Color(0, 0, 0, 1)
+shader_parameter/contrast = 3.5
+shader_parameter/lighting = 0.4
+shader_parameter/spin_amount = 0.25
+shader_parameter/pixel_filter = 2560.0
+shader_parameter/is_rotating = false
+
+[node name="ChangeScene" type="CanvasLayer"]
+process_mode = 3
+layer = 4
+script = ExtResource("1_wfwu6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ude0p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.8
+one_shot = true
+autostart = true

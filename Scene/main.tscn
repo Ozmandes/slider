@@ -1,0 +1,225 @@
+[gd_scene load_steps=19 format=3 uid="uid://dmusdxi7gpik6"]
+
+[ext_resource type="Script" path="res://Scene/main.gd" id="1_1uxxj"]
+[ext_resource type="PackedScene" uid="uid://c21lyvai7welo" path="res://Scene/UI/back_ground.tscn" id="1_4q8kg"]
+[ext_resource type="PackedScene" uid="uid://1ukxyy0pgbxw" path="res://Scene/Player/player.tscn" id="2_owr28"]
+[ext_resource type="PackedScene" uid="uid://c2f1f2dlrveog" path="res://Scene/UI/fore_ground.tscn" id="2_utnso"]
+[ext_resource type="PackedScene" uid="uid://dli8a0xf66wd8" path="res://Scene/UI/pause_menu.tscn" id="3_2d5jc"]
+[ext_resource type="PackedScene" uid="uid://74qodqlakjxk" path="res://Scene/UI/change_scene.tscn" id="4_qucid"]
+[ext_resource type="Theme" uid="uid://dh8dblbdpjymt" path="res://Scene/UI/theme.tres" id="5_it001"]
+[ext_resource type="PackedScene" uid="uid://b0ii8halcapn8" path="res://Scene/Player/enemy_component.tscn" id="5_qtddb"]
+[ext_resource type="PackedScene" uid="uid://bqo5m5swcbnf8" path="res://Scene/UI/time_component.tscn" id="6_i5sv4"]
+[ext_resource type="PackedScene" uid="uid://uwl63ofvgswb" path="res://Scene/UI/mode_choose.tscn" id="10_4vsge"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m1q2r"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_7nals"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.33129, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rpkja"]
+curve = SubResource("Curve_7nals")
+
+[sub_resource type="Curve" id="Curve_228b1"]
+_data = [Vector2(0, 0), 0.0, -0.36985, 0, 0, Vector2(1, 1), -0.594796, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_51o8v"]
+curve = SubResource("Curve_228b1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6hdh5"]
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 60.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 10, 0)
+scale_min = 4.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_51o8v")
+alpha_curve = SubResource("CurveTexture_rpkja")
+hue_variation_min = -0.95
+hue_variation_max = 0.95
+
+[sub_resource type="Gradient" id="Gradient_aroju"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eolhy"]
+gradient = SubResource("Gradient_aroju")
+width = 1
+fill_to = Vector2(0, 1)
+
+[node name="Main" type="Node2D" groups=["main"]]
+script = ExtResource("1_1uxxj")
+player_scene = ExtResource("2_owr28")
+pause_menu_scene = ExtResource("3_2d5jc")
+change_scene_scene = ExtResource("4_qucid")
+
+[node name="ModeChoose" parent="." instance=ExtResource("10_4vsge")]
+
+[node name="EnemyComponent" parent="." instance=ExtResource("5_qtddb")]
+unique_name_in_owner = true
+
+[node name="TimeComponent" parent="." instance=ExtResource("6_i5sv4")]
+unique_name_in_owner = true
+
+[node name="BackGround" parent="." instance=ExtResource("1_4q8kg")]
+unique_name_in_owner = true
+layer = -1
+
+[node name="Enemies" type="Node2D" parent="BackGround" groups=["enemies"]]
+
+[node name="Players" type="Node2D" parent="BackGround"]
+unique_name_in_owner = true
+
+[node name="Respawn" type="CanvasLayer" parent="."]
+
+[node name="RespawnTimer" type="Timer" parent="Respawn"]
+unique_name_in_owner = true
+wait_time = 5.2
+one_shot = true
+
+[node name="RespawnTimeInformation" type="Label" parent="Respawn"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -38.5
+offset_right = 49.5
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(49.5, 38.5)
+size_flags_horizontal = 4
+theme = ExtResource("5_it001")
+theme_override_colors/font_color = Color(5.77569e-07, 0.620457, 0.736316, 1)
+text = "5.2"
+
+[node name="Information" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="GameOver" type="MarginContainer" parent="Information"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(640, 360)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_bottom = 256
+
+[node name="GameOverText" type="RichTextLabel" parent="Information/GameOver"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_it001")
+bbcode_enabled = true
+text = "[center][wave amp=50]Gameover"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="Information/GameOver"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Firework" type="GPUParticles2D" parent="Information/GameOver/Control"]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_m1q2r")
+emitting = false
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_6hdh5")
+texture = SubResource("GradientTexture2D_eolhy")
+lifetime = 5.0
+one_shot = true
+speed_scale = 4.0
+explosiveness = 0.5
+randomness = 1.0
+fixed_fps = 120
+trail_enabled = true
+
+[node name="ScoreBottom" type="MarginContainer" parent="Information"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(640, 720)
+size_flags_vertical = 8
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 32
+
+[node name="ScoreDistance" type="HBoxContainer" parent="Information/ScoreBottom"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 400
+
+[node name="Player1Score" type="RichTextLabel" parent="Information/ScoreBottom/ScoreDistance"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_it001")
+theme_override_colors/default_color = Color(1, 0.180392, 0.196078, 1)
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]0"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Player2Score" type="RichTextLabel" parent="Information/ScoreBottom/ScoreDistance"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_it001")
+theme_override_colors/default_color = Color(0, 0.619608, 0.737255, 1)
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]0"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="Information"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 32
+
+[node name="TimeCount" type="RichTextLabel" parent="Information/MarginContainer2"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("5_it001")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "0:00"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ForeGround" parent="." instance=ExtResource("2_utnso")]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3cgx4mhr8w0r"]
+
+[ext_resource type="Script" path="res://Scene/Player/inspecter.gd" id="1_5o7q2"]
+
+[node name="Inspecter" type="Area2D"]
+script = ExtResource("1_5o7q2")

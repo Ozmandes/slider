@@ -1,0 +1,101 @@
+[gd_scene load_steps=11 format=3 uid="uid://c21lyvai7welo"]
+
+[ext_resource type="Shader" path="res://Scene/UI/border.gdshader" id="1_hta1s"]
+[ext_resource type="Shader" path="res://Scene/UI/water_alternative.gdshader" id="2_vkd1s"]
+[ext_resource type="Shader" path="res://Scene/UI/high_light.gdshader" id="3_qigr3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jihva"]
+shader = ExtResource("1_hta1s")
+shader_parameter/color_gap = Vector4(0, 0, 0, 1)
+shader_parameter/color_stripe = Vector4(1, 0, 0, 1)
+shader_parameter/divisions = 8.0
+shader_parameter/stripe_bias = 2.5
+shader_parameter/speed = 0.1
+shader_parameter/angle = 0.7854
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wc0pl"]
+shader = ExtResource("2_vkd1s")
+shader_parameter/R = Vector2(0.8, 0.6)
+shader_parameter/scale = 0.5
+shader_parameter/speed = 0.05
+shader_parameter/direction = Vector3(1, 1, 0)
+shader_parameter/distortion = 0.5
+shader_parameter/layers = 3.0
+shader_parameter/shades = 3.0
+shader_parameter/steps = 4
+shader_parameter/tint = Vector3(0.1, 0.1, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_enbng"]
+shader = ExtResource("3_qigr3")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.09
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.6
+shader_parameter/Speed = 0.4
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 0.6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ue7ib"]
+size = Vector2(1280, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohnvw"]
+size = Vector2(1280, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u32ox"]
+size = Vector2(16, 688)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o3mcn"]
+size = Vector2(16, 688)
+
+[node name="BackGround" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_jihva")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Water" type="ColorRect" parent="ColorRect/MarginContainer"]
+material = SubResource("ShaderMaterial_wc0pl")
+layout_mode = 2
+
+[node name="HighLight" type="ColorRect" parent="ColorRect/MarginContainer"]
+material = SubResource("ShaderMaterial_enbng")
+layout_mode = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(640, 8)
+shape = SubResource("RectangleShape2D_ue7ib")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(640, 712)
+shape = SubResource("RectangleShape2D_ohnvw")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1272, 360)
+shape = SubResource("RectangleShape2D_u32ox")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(8, 360)
+shape = SubResource("RectangleShape2D_o3mcn")

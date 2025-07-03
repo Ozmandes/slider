@@ -1,0 +1,101 @@
+[gd_scene load_steps=11 format=3 uid="uid://bb3vtlfovpr0y"]
+
+[ext_resource type="Script" path="res://Scene/Player/enemy.gd" id="1_lf78k"]
+[ext_resource type="Shader" path="res://Scene/Player/marker.gdshader" id="1_uag0e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8s2pu"]
+shader = ExtResource("1_uag0e")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/inner_stroke_thickness = 2.0
+shader_parameter/inner_stroke_opacity = 1.0
+shader_parameter/inside_opacity = 1.0
+shader_parameter/frequency = 8.0
+shader_parameter/phase_speed = 5.0
+shader_parameter/rect_size = Vector2(0.7, 0.7)
+shader_parameter/rect_position = Vector2(0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_u7kfu"]
+_data = [Vector2(0, 0), 0.0, -1.18888, 0, 0, Vector2(1, 0), -6.95707, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dptet"]
+curve = SubResource("Curve_u7kfu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gihe2"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 32.0
+emission_ring_inner_radius = 30.0
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+orbit_velocity_min = 0.2
+orbit_velocity_max = 0.3
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_dptet")
+
+[sub_resource type="Curve" id="Curve_vyugo"]
+_data = [Vector2(0, 0.00371742), 0.0, 4.81396, 0, 0, Vector2(1, 0), -2.44238, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_aq7g4"]
+curve = SubResource("Curve_vyugo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4ipn7"]
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_aq7g4")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bcr0m"]
+radius = 24.0
+
+[node name="Enemy" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_lf78k")
+
+[node name="LifeTime" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 12.0
+autostart = true
+
+[node name="Visual" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="OutLine" type="GPUParticles2D" parent="Visual"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_8s2pu")
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_gihe2")
+lifetime = 3.0
+fixed_fps = 60
+trail_enabled = true
+trail_sections = 2
+trail_section_subdivisions = 1
+
+[node name="Body" type="GPUParticles2D" parent="Visual"]
+unique_name_in_owner = true
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_4ipn7")
+lifetime = 2.0
+explosiveness = 0.2
+fixed_fps = 60
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_bcr0m")
+disabled = true

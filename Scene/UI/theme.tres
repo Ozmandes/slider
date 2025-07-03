@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dh8dblbdpjymt"]
+
+[ext_resource type="FontFile" uid="uid://ch3e0uroy7o6v" path="res://Scene/UI/Kaph-Regular.ttf" id="1_3amc7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bmlxs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0jjk0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tl48s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22lmq"]
+
+[resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0.452018, 0.0702545, 0.936259, 1)
+Button/colors/font_outline_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(0.326381, 0.00123426, 0.572335, 1)
+Button/constants/outline_size = 32
+Button/font_sizes/font_size = 96
+Button/fonts/font = ExtResource("1_3amc7")
+Button/styles/focus = SubResource("StyleBoxEmpty_bmlxs")
+Button/styles/hover = SubResource("StyleBoxEmpty_0jjk0")
+Button/styles/normal = SubResource("StyleBoxEmpty_tl48s")
+Button/styles/pressed = SubResource("StyleBoxEmpty_22lmq")
+Label/colors/font_color = Color(0.653837, 0.452328, 1, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/constants/outline_size = 16
+Label/font_sizes/font_size = 64
+Label/fonts/font = ExtResource("1_3amc7")
+RichTextLabel/colors/default_color = Color(0.654902, 0.45098, 1, 1)
+RichTextLabel/colors/font_outline_color = Color(1, 1, 1, 1)
+RichTextLabel/constants/outline_size = 32
+RichTextLabel/font_sizes/normal_font_size = 128
+RichTextLabel/fonts/normal_font = ExtResource("1_3amc7")

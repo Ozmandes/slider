@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqo5m5swcbnf8"]
+
+[ext_resource type="Script" path="res://Scene/UI/time_component.gd" id="1_7gopx"]
+
+[node name="TimeComponent" type="Node"]
+script = ExtResource("1_7gopx")
+
+[node name="OneSecond" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="CountDown" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true

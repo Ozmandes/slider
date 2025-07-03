@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1a6npo55uf2n"]
+
+[ext_resource type="AudioStream" uid="uid://csiu1ik24vfd6" path="res://assert/Goodnightmare.mp3" id="1_2wddh"]
+[ext_resource type="Script" path="res://Scene/UI/music_player.gd" id="2_hdswv"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_2wddh")
+autoplay = true
+script = ExtResource("2_hdswv")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
